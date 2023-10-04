@@ -5,6 +5,8 @@ import morgan from "morgan";
 import hbs from "express-handlebars";
 import path from "path";
 import { __dirname } from "./utils/dirname.js";
+import flash from "connect-flash";
+import session from "express-session";
 
 const app = express();
 
@@ -24,15 +26,28 @@ app.engine(
         layoutsDir: path.resolve(__dirname, "..", "views/layouts"),
     })
 );
+app.use(
+    session({
+        secret: "changeit",
+        resave: false,
+        saveUninitialized: false,
+    })
+);
+app.use(flash());
 
 // ROUTES
 app.get("/", (req, res) => {
-    return res.render("home", { title: "Home" });
+    return res.render("home", {
+        title: "Home",
+        success_messages: req.flash("success"),
+    });
 });
 app.get("/upload-file", (req, res) => {
     return res.render("uploadfile", { title: "Upload File" });
 });
-
+app.post("/upload-file", (req, res) => {
+    res.redirect("/upload-file");
+});
 // ERROR HANDLERS
 
 export default app;
