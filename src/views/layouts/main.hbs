@@ -1,0 +1,46 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/media/main.css" />
+        <title>Fileshare - {{title}}</title>
+    </head>
+    <body>
+        <header class="w-full">
+            <nav class="flex justify-around w-full p-4">
+                <h2 class="font-bold text-2xl text-orange-600">FileShare</h2>
+                <ul class="flex gap-6 items-center">
+                    <li>
+                        <a
+                            class="text-sm font-medium text-gray-700 hover:text-orange-600"
+                            href="/"
+                        >Home</a>
+                    </li>
+                    <li>
+                        <a
+                            class="text-sm font-medium text-gray-700 hover:text-orange-600"
+                            href="/upload-file"
+                        >Upload</a>
+                    </li>
+                    <li class="w-72">
+                        <div class="relative">
+                            <input
+                                type="text"
+                                class="input w-full max-w-sm bg-gray-100 rounded-full pb-1 px-4 text-gray-700 text-sm font-medium"
+                                placeholder="Search files"
+                            />
+                            <img
+                                src="/media/icons/search.png"
+                                alt="Search"
+                                class="absolute top-4 right-4 w-4"
+                            />
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {{{body}}}
+        </main>
+    </body>
+</html>

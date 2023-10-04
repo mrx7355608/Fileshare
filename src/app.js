@@ -13,6 +13,7 @@ app.use(helmet());
 app.use(hpp());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use("/media", express.static(path.join(__dirname, "..", "..", "public")));
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "..", "/views"));
 app.engine(
@@ -20,11 +21,17 @@ app.engine(
     hbs.engine({
         defaultLayout: "main",
         extname: "hbs",
-        layoutsDir: path.resolve(__dirname, "..", "/views/layouts"),
+        layoutsDir: path.resolve(__dirname, "..", "views/layouts"),
     })
 );
 
 // ROUTES
+app.get("/", (req, res) => {
+    return res.render("home", { title: "Home" });
+});
+app.get("/upload-file", (req, res) => {
+    return res.render("uploadfile", { title: "Upload File" });
+});
 
 // ERROR HANDLERS
 
