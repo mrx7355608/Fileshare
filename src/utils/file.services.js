@@ -79,4 +79,15 @@ export class FileServices {
     get isPasswordProtected() {
         return this.password ? true : false;
     }
+
+    createFileObject(downloadURL) {
+        return {
+            name: this.name,
+            size: this.size,
+            password: this.filePassword,
+            type: this.type.toUpperCase(),
+            isPasswordProtected: this.isPasswordProtected,
+            downloadURL,
+        };
+    }
 }
