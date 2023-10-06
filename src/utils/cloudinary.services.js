@@ -35,6 +35,7 @@ export class CloudinaryServices {
             downloadURL = cloudinary.url(uploadedFile.public_id, {
                 flags: "attachment",
                 resource_type: uploadedFile.resource_type,
+                secure: true,
             });
         } else {
             const fileParts = this.file.originalname.split(".");
@@ -44,6 +45,7 @@ export class CloudinaryServices {
                 flags: "attachment",
                 resource_type: uploadedFile.resource_type,
                 format: fileType,
+                secure: true,
             });
         }
         return downloadURL;

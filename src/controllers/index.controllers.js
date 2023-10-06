@@ -42,7 +42,7 @@ const uploadFile = async (req, res) => {
         res.redirect("/");
     } catch (err) {
         // redirect to an error page that shows a internal server error
-        console.log(err.message);
+        console.log({ msg: err.message });
         res.redirect("/");
     }
 };
