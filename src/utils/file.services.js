@@ -8,6 +8,9 @@ export class FileServices {
         if (!this.file) {
             return "No file was selected!";
         }
+        if (this.file.size === 0) {
+            return "Empty files cannot be uploaded";
+        }
         if (!this.validateFilename()) {
             return "Invalid filename";
         }
