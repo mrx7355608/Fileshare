@@ -79,6 +79,29 @@ async function downloadPasswordProtectedFile(fileID, password) {
     };
 }
 
+async function searchFiles(fileName) {
+    const files = await FileModel.find(
+        {
+            name: { $regex: new RegExp(fileName), $options: "i" },
+        },
+        "-password -__v"
+    )
+        .sort("-createdAt")
+        .lean();
+    const resutls = files.map((f) => {
+        return {
+            id: f._id,
+            name: f.name,
+            type: f.type.toUpperCase(),
+            size: f.size,
+            downloadURL: f.downloadURL,
+            isPasswordProtected: f.isPasswordProtected,
+            createdAt: new Date(f.createdAt).toDateString(),
+        };
+    });
+    return resutls;
+}
+
 export const indexServices = {
     listAllFiles,
     validateFile,
@@ -86,4 +109,5 @@ export const indexServices = {
     createFileObject,
     addFileInDB,
     downloadPasswordProtectedFile,
+    searchFiles,
 };

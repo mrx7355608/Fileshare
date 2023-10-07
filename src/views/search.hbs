@@ -1,0 +1,50 @@
+<div class="mx-auto w-full max-w-5xl" style="min-height: 84%;">
+    <h1 class="text-3xl text-gray-700 font-bold">Showing results for "{{filename}}"</h1>
+    <section
+        class="flex flex-wrap items-center justify-start gap-8 w-full mt-10"
+    >
+        {{#each searchResults}}
+            <div
+                class="rounded-lg bg-orange-50 border-2 border-orange-100 p-4 w-80 h-auto"
+            >
+                <div class="flex gap-2 items-center mb-2">
+                    <p
+                        class="bg-orange-600 text-white p-1 rounded-md text-xs font-medium"
+                    >
+                        {{type}}
+                    </p>
+                    <h3 class="font-bold text-lg text-gray-800">{{name}}</h3>
+                </div>
+                {{#if isPasswordProtected}}
+                    <div
+                        class="flex items-center gap-1 text-gray-700 rounded-full"
+                    >
+                        <img class="w-5" src="/media/icons/lock.png" />
+                        <h3 class="font-medium text-sm">Password Protected</h3>
+                    </div>
+                {{/if}}
+                <div class="flex justify-between mt-6">
+                    <span
+                        class="text-orange-800 font-medium text-sm"
+                    >{{size}}</span>
+                    <span
+                        class="text-orange-800 font-medium text-sm ml-2"
+                    >{{createdAt}}</span>
+                </div>
+                {{#if isPasswordProtected}}
+                    <a
+                        href="/download-file/{{id}}"
+                        target="_blank"
+                        class="btn btn-error font-medium text-sm tracking-wide mt-3 w-full btn-sm rounded-md"
+                    >Download</a>
+                {{else}}
+                    <a
+                        href="{{downloadURL}}"
+                        target="_blank"
+                        class="btn btn-error font-medium text-sm tracking-wide mt-3 w-full btn-sm rounded-md"
+                    >Download</a>
+                {{/if}}
+            </div>
+        {{/each}}
+    </section>
+</div>

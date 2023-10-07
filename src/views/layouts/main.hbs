@@ -24,16 +24,22 @@
                     </li>
                     <li class="w-72">
                         <div class="relative">
-                            <input
-                                type="text"
-                                class="input w-full max-w-sm bg-gray-100 rounded-full pb-1 px-4 text-gray-700 text-sm font-medium"
-                                placeholder="Search files"
-                            />
-                            <img
-                                src="/media/icons/search.png"
-                                alt="Search"
-                                class="absolute top-4 right-4 w-4"
-                            />
+                            <form action="/search" method="get" class="m-0 p-0">
+                                <input
+                                    type="text"
+                                    class="input w-full max-w-sm bg-gray-100 rounded-full pb-1 px-4 text-gray-700 text-sm font-medium"
+                                    placeholder="Search files"
+                                    name="file"
+                                />
+                                <button
+                                    type="submit"
+                                    class="absolute top-4 right-4 p-0 m-0 bg-transparent"
+                                ><img
+                                        src="/media/icons/search.png"
+                                        alt="Search"
+                                        class="w-4"
+                                    /></button>
+                            </form>
                         </div>
                     </li>
                 </ul>

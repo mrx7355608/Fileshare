@@ -41,9 +41,8 @@ const uploadFile = async (req, res) => {
         req.flash("success", "File uploaded successfully!");
         res.redirect("/");
     } catch (err) {
-        // redirect to an error page that shows a internal server error
-        console.log({ msg: err.message });
-        res.redirect("/");
+        console.log("Upload file error:", err.message);
+        res.render("error", { title: "Error" });
     }
 };
 
@@ -55,18 +54,32 @@ const renderDownloadFilePage = (req, res) => {
 };
 
 const downloadFile = async (req, res) => {
-    const fileID = req.params.id;
-    const { password } = req.body;
-    const { ok, resp } = await indexServices.downloadPasswordProtectedFile(
-        fileID,
-        password
-    );
-    if (!ok) {
-        req.flash("error", resp);
-        return res.redirect(`/download-file/${fileID}`);
+    try {
+        const fileID = req.params.id;
+        const { password } = req.body;
+        const { ok, resp } = await indexServices.downloadPasswordProtectedFile(
+            fileID,
+            password
+        );
+        if (!ok) {
+            req.flash("error", resp);
+            return res.redirect(`/download-file/${fileID}`);
+        }
+        res.redirect(resp);
+    } catch (err) {
+        console.log("Download protected file error:", err.message);
+        res.render("error", { title: "Error" });
     }
-    console.log({ resp });
-    res.redirect(resp);
+};
+
+const renderSearchPage = async (req, res) => {
+    const { file } = req.query;
+    const searchResults = await indexServices.searchFiles(file);
+    return res.render("search", {
+        title: "Search",
+        searchResults,
+        filename: file,
+    });
 };
 
 export const indexControllers = {
@@ -75,4 +88,5 @@ export const indexControllers = {
     uploadFile,
     renderDownloadFilePage,
     downloadFile,
+    renderSearchPage,
 };

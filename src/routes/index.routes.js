@@ -12,5 +12,6 @@ router.get("/upload-file", indexControllers.renderUploadFilePage);
 router.post("/upload-file", upload.single("file"), indexControllers.uploadFile);
 router.get("/download-file/:id", indexControllers.renderDownloadFilePage);
 router.post("/download-file/:id", indexControllers.downloadFile);
+router.get("/search", indexControllers.renderSearchPage);
 
 export default router;
